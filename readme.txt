@@ -4,3 +4,11 @@ This is ReadMe.
 你好，中国！
 #!/usr/bin/env python3
 import urllib
+def add(x,y):
+	return x +y
+
+if __name__ == "__main__":
+	x = 3
+	y = 4
+	print add(x,y)
+	exit(0)
