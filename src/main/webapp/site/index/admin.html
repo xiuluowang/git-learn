@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业资源共享平台-管理员首页</title>
+    <link href="/ersp/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/ersp/css/index/index.css" rel="stylesheet">
+    <script src="/ersp/js/bootstrap/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app="erspApp" onload="init();" class="admin">
+<!-- 顶部导航 -->
+<div ng-controller="loginCtrl" adminnavbar></div>
+<!-- 主要内容 -->
+<div class="container summary">
+    <!-- 页脚 -->
+    <div ng-include="'/ersp/site/common/footer.html'"></div>
+</div>
+<script src="/ersp/js/base/jquery-1.10.2.js"></script>
+<script src="/ersp/js/bootstrap.min.js"></script>
+<script src="/ersp/js/index/navbarctrl.js"></script>
+<script>
+function init() {
+	//默认显示用户管理界面
+	window.location.href = "/ersp/site/user/list.html";
+}	
+</script>
+</body>
+</html>

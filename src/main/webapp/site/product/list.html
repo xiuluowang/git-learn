@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业资源共享平台-管理员首页</title>
+    <!-- bootstarp V-3.3.7 -->
+    <link href="/ersp/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/ersp/css/bootstrap/table/1.10.1/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <link href="/ersp/css/index/index.css" rel="stylesheet">
+    <script src="/ersp/js/base/jquery-1.10.2.js"></script>
+	<script src="/ersp/js/bootstrap.min.js"></script>
+	<script src="/ersp/js/bootstrap/table/1.10.1/bootstrap-table.js"></script>
+	<script src="/ersp/js/bootstrap/table/1.10.1/bootstrap-table-zh-CN.js"></script>
+	<script src="/ersp/js/bootstrap/dialog/1.34.7/bootstrap-dialog.js"></script>
+	<script src="/ersp/js/bootstrap/angularjs/1.6.4/angular.min.js"></script>
+	<script src="/ersp/js/base/base.js"></script>
+	<script src="/ersp/js/index/navbarctrl.js"></script>
+</head>
+<body ng-app="erspApp" class="admin">
+<div ng-controller="loginCtrl" adminnavbar></div>
+<div class="container summary">
+	<div class="row" id="summary-container">
+	  <div class="col-md-12">
+	  	<div class="panel panel-primary">
+		  <div class="panel-heading">产品查询</div>
+		  <div class="panel-body">
+			 <div class="row">
+			      <div class="col-sm-4">
+			        <input type="text" class="form-control" id="proName" placeholder="产品名称">
+			      </div>
+			      <div class="col-sm-4">
+			        <input type="text" class="form-control" id="proType" placeholder="产品类型">
+			      </div>
+			      <div class="col-sm-4">
+			        <button type="button" class="btn btn-info" id="serach_btn">查询</button>&ensp;
+			      </div>
+		  		</div>
+		  </div>
+		</div>
+		<div class="panel panel-primary">
+		  <div class="panel-heading">产品列表</div>
+		   <div id="toolbar">
+			<button type="button" class="btn btn-success" id="add_btn"><i class="glyphicon glyphicon-plus"></i>添加</button>&ensp;
+			        <button type="button" class="btn btn-danger" id="del_btn"><i class="glyphicon glyphicon-remove"></i>删除</button>     		 
+		  </div>
+		  <div class="panel-body">
+			 <div><table id="table"></table></div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+<div class="modal fade" data-backdrop="static" data-title="" data-proid="" id="productModel">
+	
+</div>
+<div ng-include="'./../common/footer.html'"></div>
+<script>
+var priceFormatter=function(value,row,index) {
+	
+	if(value != null && value > 0){
+		
+		return "￥"+value;
+	}else{
+		
+		return "-";
+	}
+};
+
+function refreshTable(){
+	
+	$("#table").bootstrapTable('refreshOptions', {
+		url: '/ersp/api/product/list',
+		queryParams : function getParams(params) {
+    		
+    		params.page = this.pageNumber;
+    		params.rows = this.pageSize;
+    		params.sord = this.sortOrder;
+    		params.sidx = this.sortName;
+    		params.proName = $("#proName").val();
+    		params.proType = $("#proType").val();
+    		return params;
+    	}
+	});  
+}
+
+$(function () {
+		
+    $("#serach_btn").click(refreshTable);
+    $("#table").bootstrapTable({
+    	url: '/ersp/api/product/list', 
+    	method: 'get', 
+    	toolbar:"#toolbar",
+    	striped: true, //是否显示行间隔色
+       	cache: false, 
+       	pagination: true, //是否显示分页
+        sortable: true, //是否启用排序
+        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+        sortOrder: "desc",   
+        sortName:"publishDate",
+        pageNumber:1, //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数
+        pageList: [10, 25, 50, 100],  
+        showColumns: true,  //是否显示所有的列
+        showRefresh: true, //是否显示刷新按钮
+        minimumCountColumns: 2, //最少允许的列数
+        clickToSelect: true, //是否启用点击选中行
+        height: 435, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        uniqueId: "id", //每一行的唯一标识，一般为主键列
+        showToggle:true,  //是否显示详细视图和列表视图的切换按钮
+        cardView: false,   //是否显示详细视图
+        detailView: false,  //是否显示父子表
+        columns: [{
+    		checkbox : true
+    	},{
+            field: 'id',
+            width: 60,
+            align: 'center',
+            title: '产品编号',
+            visible : false
+        }, {
+            field: 'type.name',
+            width: 250,
+            align: 'center',
+            sortable:true,
+            title: '产品类型'
+        }, {
+            field: 'name',
+            width: 250,
+            align: 'center',
+            sortable:true,
+            title: '产品名称'
+        }, {
+            field: 'referenceprice',
+            width: 120,
+            align: 'center',
+            sortable:true,
+            title: '产品价格',
+            formatter:priceFormatter
+        }, {
+            field: 'publishDate',
+            width: 120,
+            align: 'center',
+            sortable:true,
+            title: '发布时间',
+            formatter:function(value,row,index){
+            	
+            	return dataFormatter(value);
+            }
+        },{
+            title: '操作',
+            align: 'center',
+            width: 30,
+            formatter:function(value,row,index){
+            	
+                var a = '<a href="#" class="glyphicon glyphicon-edit" onclick="detail(\''+row.id+'\')"></a>';
+                return a;
+            } 
+        }],
+    	queryParams : function getParams(params) {
+    		
+    		params.page = this.pageNumber;
+    		params.rows = this.pageSize;
+    		params.sord = this.sortOrder;
+    		params.sidx = this.sortName;
+    		params.proName = "";
+    		params.proType = "";
+    		return params;
+    	}
+    });
+    
+    $("#add_btn").click(function(){
+		
+		$("#productModel").attr("data-title","发布产品");
+		$("#productModel").attr("data-proid","");
+    	showProductModel();
+	});
+    
+    $("#del_btn").click(function(){
+    	
+    	deleteProduct();
+    });
+});
+
+function hideModal(isRefresh) {
+	
+	location.reload(false);
+	$('#productModel').modal('hide');
+	if(isRefresh){
+		
+		refreshTable();
+	}
+}
+
+/**
+ * 显示产品模态框
+ */
+function showProductModel(){
+	
+	//打开添加页面前先清空其他模态框内容 以免序列化表单时获取信息干扰
+	$("#productModel").load("product2.html",function(){
+		
+		$("#productModel").modal('show');
+	});
+}
+
+/**
+ * 显示产品详述
+ */
+function detail(id){
+	
+	$("#productModel").attr("data-title","修改产品");
+	$("#productModel").attr("data-proid",id);
+	showProductModel();
+}
+
+/**
+ * 获取产品模态框所需参数
+ */
+function getProductModelParam(){
+	
+	var data={
+	     title:$("#productModel").attr("data-title"),
+	     id:$("#productModel").attr("data-proid")
+	 };
+	var jsonData = JSON.stringify(data);
+	return jsonData;
+}
+
+/**
+ * 删除产品
+ */
+function deleteProduct(){
+	
+	var selectProduct = $("#table").bootstrapTable("getSelections");
+	var proIds="";
+	if (selectProduct != null && selectProduct.length>0) {
+		var length = selectProduct.length;
+		for (var i=0;i<length;i++) {
+			proIds = proIds+selectProduct[i].id+",";
+		}
+		if (proIds != "") {
+			proIds = proIds.substring(0,proIds.lastIndexOf(","));
+		}
+		BootstrapDialog.show({
+	        title: '系统提示',
+	        message: '确定要删除吗?',
+	        buttons: [{
+	            label: '确定',
+	            cssClass: 'btn-primary',
+	            action: function(dialog) {
+	            	$.ajax({
+	        			type: 'DELETE',
+	         			dataType:'json',
+	         			url:'/ersp/product/'+proIds,
+	         			success:function(data){
+	         				
+	         				refreshTable();
+	         				dialog.close();
+	         			}
+	        		});
+	            }
+	        }, {
+	            label: '取消',
+	            action: function(dialog) {
+	            	
+	            	dialog.close();
+	            }
+	        }]
+	    });
+	} else {
+		
+		BootstrapDialog.show({
+			type:BootstrapDialog.TYPE_SUCCESS,
+	         title: '系统提示',
+	         message: '请至少选择一条记录!',
+	         buttons: [{
+	             label: '明白了',
+	             cssClass: 'btn-primary',
+	             action: function(dialog) {
+	            	 dialog.close();
+	             }
+	         }]
+	     });
+	}
+}
+</script>
+</body>
+</html>

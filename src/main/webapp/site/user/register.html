@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用户注册</title>
+<link href="/ersp/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/ersp/css/bootstrap/validator/0.5.2/bootstrapValidator.css" rel="stylesheet" />
+<script src="/ersp/js/bootstrap/angularjs/1.6.4/angular.min.js"></script>
+
+<style type="text/css">
+	.register {
+		margin-left:32px;font-size:14px;
+	}
+	.register .info {
+		margin-left:35px;
+	}
+	.regBtn {
+		background-color:#FFA930;
+ 		color:#fff;
+	}
+</style>
+</head>
+<body>
+<div class="container">
+  	<h4>产品推荐  <small>TOP PRODUCT</small></h4>
+    <div class="row" id="summary-container">
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/C-1.jpg" alt="">
+            <div align="center"><h5>软件测试评估软件 </h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/C-2.jpg" alt="">
+            <div align="center"><h5>研发质量保证软件 </h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/C-3.jpg" alt="">
+            <div align="center"><h5>试验数据分析软件</h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/C-1.jpg" alt="">
+            <div align="center"><h5>软件测试评估软件 </h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/C-2.jpg" alt="">
+            <div align="center"><h5>研发质量保证软件 </h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/C-3.jpg" alt="">
+            <div align="center"><h5>试验数据分析软件</h5></div>
+        </div>
+    </div>
+   <hr class="divider">
+   <div class="row">
+  	 <div class="col-md-12">
+  	 	<div class="panel panel-warning">
+		  <div class="panel-heading" style="background-color:#FFA930;
+ 	color:#fff;">会员注册</div>
+		  <div class="panel-body">
+		  	<form class="form-horizontal" method="POST" action="/ersp/sso/register" name="registerForm" id="registerForm">
+		  	  <input type="hidden" class="form-control" name="utype" value="2"/>
+		      <input type="hidden" id="userId" value=""/>
+			  <div class="form-group">
+			  	<label for="uname" class="col-sm-2 control-label">用户名</label>
+			    <div class="col-sm-7">
+			     	 <input type="text" class="form-control" name="uname" id="uname" placeholder="用户名">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  	<label for="telephone" class="col-sm-2 control-label">联系电话</label>
+			    <div class="col-sm-7">
+			     	 <input type="text" class="form-control" name="telephone" id="telephone" placeholder="联系电话">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  	<label for="email" class="col-sm-2 control-label">邮箱</label> 
+			    <div class="col-sm-7">
+			     	 <input type="email" class="form-control" name="email" id="email" placeholder="邮箱">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  	<label for="name" class="col-sm-2 control-label">姓名</label> 
+			    <div class="col-sm-7">
+			     	 <input type="text" class="form-control" name="name" id="name" placeholder="姓名">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  	<label for="company" class="col-sm-2 control-label">公司名称</label>
+			    <div class="col-sm-7">
+			     	 <input type="text" class="form-control" name="company" id="company" placeholder="公司名称">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			 	<label for="caddress" class="col-sm-2 control-label">公司地址</label> 
+			    <div class="col-sm-7">
+			     	 <input type="text" class="form-control" name="caddress" id="caddress" placeholder="公司地址">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			  	<label for="password" class="col-sm-2 control-label">密码</label>
+			    <div class="col-sm-7">
+			      	<input type="password" class="form-control" name="password" id="password" placeholder="密码">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="button" class="btn btn-warning regBtn" id="btn-register">免费注册</button>
+			    </div>
+			  </div>
+			</form>
+		  </div>
+		</div>
+  	 </div>
+    </div>
+   
+    <div class="row">
+    <img class="img-responsive img-thumbnail" src="/ersp/images/index/A-1.jpg" alt="">
+  	</div>
+  	<h4>企业推荐 <small>RECOMMENDED BRANDS</small></h4>
+    <div class="row">
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/B-1.jpg" alt="">
+            <div align="center"><h5>河南承信齿轮传动有限公司</h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/B-2.jpg" alt="">
+            <div align="center"><h5>机械科学研究总院</h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/B-3.jpg" alt="">
+            <div align="center"><h5>福田雷沃国际重工</h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/B-4.jpg" alt="">
+            <div align="center"><h5>中信重工机械股份有限公司</h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/B-5.png" alt="">
+            <div align="center"><h5>奥盟食品机械自营店</h5></div>
+        </div>
+        <div class="col-md-2">
+            <img class="img-thumbnail" src="/ersp/images/index/B-6.jpg" alt="">
+            <div align="center"><h5 style="margin-left:15px;">三联会展</h5></div>
+        </div>
+    </div>
+  	 <!-- 页脚 -->
+    <div ng-app="" ng-include="'/ersp/site/common/footer.html'"></div>
+</div>
+<script src="/ersp/js/base/jquery-1.10.2.js"></script>
+<script src="/ersp/js/bootstrap.min.js"></script>
+<script src="/ersp/js/bootstrap/validator/0.5.2/bootstrapValidator.js"></script>
+<script src="/ersp/js/user/registerform.js"></script>
+</body>
+</html>

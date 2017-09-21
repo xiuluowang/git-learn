@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./../../css/bootstrap.min.css" rel="stylesheet" />
+<link href="./../../css/bootstrap/fileinput/4.4.0/fileinput.css" rel="stylesheet" type="text/css"/>
+<script src="./../../js/base/jquery-1.10.2.js"></script>
+<script src="./../../js/bootstrap.min.js"></script>
+<script src="./../../js/bootstrap/fileinput/4.4.0/fileinput.js"></script>
+<script src="./../../js/bootstrap/fileinput/4.4.0/fileinput_zh.js"></script>
+<title>无标题文档</title>
+</head>
+
+
+<body ng-app="">
+<div class="row">
+  <div class="col-md-11">
+  	<div class="panel panel-primary">
+	<div class="panel-heading">发布产品-上传产品照片</div>
+		<div class="panel-body">
+			<form class="form-horizontal" id="defaultForm" method="post" action="#">
+				<div class="form-group" id="div_pro_name">   
+				   <div class="col-sm-12">
+					 <input id="kv-explorer" type="file" multiple />
+				   </div>
+				</div>
+			</form>
+	</div>
+	<div class="panel-footer">
+    	<button type="button" class="btn btn-default" id="close_btn">关闭</button>
+		<button type="button" class="btn btn-primary" id="submit_btn" >保存</button>
+	</div>
+	</div>
+  </div>
+</div>
+<script>
+$(document).on('ready', function() {
+	$("#kv-explorer").fileinput({
+        'theme': 'explorer',
+        'uploadUrl': '#',
+        language: 'zh',
+        overwriteInitial: false,
+        initialPreviewAsData: true
+    });
+});
+</script>
+</body>
+</html>

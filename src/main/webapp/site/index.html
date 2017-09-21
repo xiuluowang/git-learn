@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>企业资源共享平台-管理员首页</title>
+	<link rel="stylesheet" type="text/css"
+		href="/ersp/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css"
+		href="/ersp/css/bootstrap/table/1.10.1/bootstrap-table.css">
+	<link rel="stylesheet" type="text/css"
+		href="/ersp/css/bootstrap/dialog/1.34.7/bootstrap-dialog.css">
+	<link rel="stylesheet" type="text/css" href="/ersp/css/index/index.css" >
+<style>
+body {padding-top: 70px;}
+.rightBtn {float: right;margin-top: 8px;}
+</style>
+<script
+	src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="">
+	<div ng-include="'/ersp/site/common/admin-header.html'"></div>
+	<!-- 主要内容 -->
+	<div class="container summary">
+		<div class="row" id="summary-container">
+			<div class="panel panel-primary">
+				<div class="panel-heading">管理产品</div>
+				<div class="panel-body">
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<span>条件:&ensp;</span><input type="text" class="form-control"
+								placeholder="条件"> <span>条件:&ensp;</span><input
+								type="text" class="form-control" placeholder="条件"> <span>条件:&ensp;</span><input
+								type="text" class="form-control" placeholder="条件"> <span>条件:&ensp;</span><input
+								type="text" class="form-control" placeholder="条件">
+						</div>
+					</form>
+					<div class="rightBtn">
+						<button type="button" class="btn btn-info">查询</button>
+						&ensp;
+						<button type="button" class="btn btn-success" id="add_btn">添加</button>
+						&ensp;
+						<button type="button" class="btn btn-danger" id="del_btn" title=""
+							data-container="body" data-toggle="popover" data-html="true"
+							data-placement="auto left">删除</button>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">产品列表</div>
+				<div class="panel-body">
+					<div>
+						<table id="table"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-include="'/ersp/site/common/footer.html'"></div>
+</body>
+<object type="text/x-scriptlet"></object>
+<script src="/ersp/js/base/jquery-1.10.2.js"></script>
+<script src="/ersp/js/bootstrap.min.js"></script>
+<script src="/ersp/js/bootstrap/table/1.10.1/bootstrap-table.js"></script>
+<script src="/ersp/js/bootstrap/table/1.10.1/bootstrap-table-zh-CN.js"></script>
+<script src="/ersp/js/bootstrap/dialog/1.34.7/bootstrap-dialog.js"></script>
+<script>
+$(function () {
+	$(".navbar-nav>li").each(function(){
+		$(this).click(function(){
+			$(".navbar-nav>li").removeClass("active");
+			$(this).addClass("active");
+		});
+	});	
+    $('#ad-carousel').carousel();
+    $('#menu-nav .navbar-collapse a').click(function (e) {
+        var href = $(this).attr('href');
+        var tabId = $(this).attr('data-tab');
+        if ('#' !== href) {
+            e.preventDefault();
+            $(document).scrollTop($(href).offset().top - 70);
+            if (tabId) {
+                $('#feature-tab a[href=#' + tabId + ']').tab('show');
+            }
+        }
+    });
+    
+    $("#del_btn").click(deleteInfo);
+    $("#add_btn").click(addInfo);
+});
+
+$('#table').bootstrapTable({
+    columns: [{
+		checkbox : true
+	},{
+        field: 'id',
+        width: 60,
+        align: 'center',
+        title: '产品编号',
+        visible : false
+    }, {
+        field: 'name',
+        width: 250,
+        align: 'center',
+        title: '产品名称'
+    }, {
+        field: 'price',
+        width: 120,
+        align: 'center',
+        title: '产品价格'
+    },{
+        title: '操作',
+        align: 'center',
+        width: 30,
+        formatter:function(value,row,index){
+            var a = '<a href="#" class="glyphicon glyphicon-edit"></a>';
+            return a;
+        } 
+    }],
+    data: [{
+        id: 1,
+        name: '黄果树-福贵-S1',
+        price: '￥10.00'
+    }, {
+        id: 2,
+        name: '黄果树-福贵-S2',
+        price: '￥20.00'
+    },{
+        id: 3,
+        name: '黄果树-福贵 -S3',
+        price: '￥30.00'
+    },{
+        id: 4,
+        name: '黄果树-福贵 -S4',
+        price: '￥40.00'
+    },{
+        id: 5,
+        name: '黄果树-福贵-S5',
+        price: '￥50.00'
+    },{
+        id: 6,
+        name: '黄果树-福贵-S6',
+        price: '￥60.00'
+    },{
+        id: 7,
+        name: '黄果树-福贵-S7',
+        price: '￥70.00'
+    },{
+        id: 8,
+        name: '黄果树-福贵-S8',
+        price: '￥80.00'
+    },{
+        id: 9,
+        name: '黄果树-福贵-S9',
+        price: '￥90.00'
+    },{
+        id: 10,
+        name: '黄果树-福贵-S10',
+        price: '￥100.00'
+    },{
+        id: 11,
+        name: '黄果树-福贵-S11',
+        price: '￥110.00'
+    },{
+        id: 12,
+        name: '黄果树-福贵-S12',
+        price: '￥120.00'
+    },{
+        id: 13,
+        name: '黄果树-福贵-S13',
+        price: '￥130.00'
+    },{
+        id: 14,
+        name: '黄果树-福贵-S14',
+        price: '￥140.00'
+    }],
+	sortable: true, 
+	sortName:"id",
+	sortOrder:"asc",
+	clickToSelect: true,
+	sidePagination : "client",
+	uniqueId : "id",
+	height:472,
+	search : false,
+	striped : true,
+	pagination : true,
+	pageNumber:1,
+	pageSize : 10,
+	pageList : [10,20,50,100],
+	queryParams : function getParams(params) {
+		return {
+			page : this.pageNumber,
+			rows : params.limit,
+			sord:this.sortOrder,
+			sidx:this.sortName
+		};
+	}
+});
+
+function login() {
+	window.location.href = "./login.html";
+}
+
+function deleteInfo(){
+	var optionsInfo = {
+		content:"<h5><font color='red'>请至少选择一条数据!</font></h5>"
+	};
+	$("#del_btn").popover(optionsInfo).popover('show');
+}
+
+function addInfo(){
+	BootstrapDialog.show({
+        title: '系统提示',
+        message: 'XXXXXXXXXXXXXXXX',
+        buttons: [{
+            label: '确定',
+            cssClass: 'btn-primary',
+            action: function(dialog) {
+            	BootstrapDialog.alert({
+            		title: '系统提示',
+                    message: '~~~~~~~~~~~',
+            	});
+            }
+        }, {
+            label: '取消',
+            action: function(dialog) {
+            	
+            	dialog.close();
+            }
+        }]
+    });
+}
+</script>
+</html>

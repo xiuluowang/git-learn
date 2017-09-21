@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>企业资源共享平台-管理员首页</title>
+<!-- bootstarp V-3.3.7 -->
+<link href="/ersp/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/ersp/css/bootstrap/table/1.10.1/bootstrap-table.css" rel="stylesheet" type="text/css">
+<link href="/ersp/css/index/index.css" rel="stylesheet">
+<link href="/ersp/css/list/list.css" rel="stylesheet">
+<script src="/ersp/js/base/jquery-1.10.2.js"></script>
+<script src="/ersp/js/bootstrap.min.js"></script>
+<script src="/ersp/js/bootstrap/table/1.10.1/bootstrap-table.js"></script>
+<script src="/ersp/js/bootstrap/table/1.10.1/bootstrap-table-zh-CN.js"></script>
+<script src="/ersp/js/bootstrap/dialog/1.34.7/bootstrap-dialog.js"></script>
+<script src="/ersp/js/bootstrap/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body ng-app="proApp" ng-init="page='list.html'" ng-controller="proCtrl">
+<!-- 顶部导航 -->
+<div ng-include="'/ersp/site/common/admin-header.html'"></div>
+<div class="row" >
+  <div class="col-md-3">
+  	<div class="panel panel-primary">
+	  <div class="panel-heading"><span class="glyphicon glyphicon-list"></span></div>
+	  <div class="panel-body">
+	  	<ul class="nav nav-pills nav-stacked">
+		  	<li class="active"><a href="#" ng-click="page='list.html'">产品列表</a></li>
+			<li class="active"><a href="#" ng-click="page='product.html'">添加产品</a></li>
+		</ul>
+	  </div>
+	</div>
+  	<div class="panel panel-primary">
+	  <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span></div>
+	  <div class="panel-body">
+	  	<ul class="list-group">
+		  <li class="list-group-item list-group-item-success">今日上架产品200件</li>
+		  <li class="list-group-item list-group-item-info">今日成交产品25件</li>
+		  <li class="list-group-item list-group-item-danger">今日下架产品20件</li>
+		</ul>
+	  </div>
+	</div>
+  </div>
+  <div class="col-md-9"><!-- 主要内容 -->
+  	<div ng-include src="page" id="productPage"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12"> <div ng-include="'./../common/footer.html'"></div></div>
+</div>
+<script>
+var scope = null;
+var app = angular.module('proApp', []);
+app.controller('proCtrl', function($scope) {
+	scope = $scope;
+	//alert(scope);
+});
+function getScope(){
+	
+	return scope;
+}
+
+function setProductPage(url){
+	
+	alert(22222);
+	app.controller('proCtrl', function($scope) {
+
+		alert(url);
+		$scope.page=url;
+		//alert(scope);
+	});
+}
+function login() {
+	window.location.href = "./login.html";
+} 
+</script>
+</body>
+</html>

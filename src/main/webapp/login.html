@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业资源共享平台-登录页</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/login/login.css" rel="stylesheet">
+  </head>
+  <body>
+  <div class="login yahei">
+	<div class="container">
+		<!-- 左边背景图片 -->
+		<div class="login-bg">
+			<a href="#">
+				<img src="./images/index/a-1.png" height="400" width="630" alt="企业资源共享平台">
+			</a>
+		</div>
+
+		<div class="login-inner">
+			<div class="login-top">
+				<ul>
+	        		<li class="first current" style="margin-top:-10px;">会员登录 </li>
+	    	    </ul>
+			</div>
+			<div id="form_tab" class="login-form">
+				<form id="form-login" name="Formlogin" method="post">
+					<div class="login_textreg">
+						<div id="error_login" class="show_error"></div>
+						<p>
+							<input type="text" class="login-text ui-text2" name="username" id="username" placeholder="用户名/邮箱/手机号">
+						</p>
+						<p>
+							<input type="password" class="login-text ui-text2 pwd" name="password" id="password" placeholder="密码">
+						</p>
+					</div>
+					<div class="login_buttonreg">
+						<input name="submitlogin" class="login-sub" value="登录" type="button" id="login">
+					</div>
+					<p class="ten1">
+						还没有账号？
+						<a href="/ersp/site/user/register.html" class="forget">我要注册</a>
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="./js/base/jquery-1.10.2.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/login/login.js"></script>
+</body>
+</html>
